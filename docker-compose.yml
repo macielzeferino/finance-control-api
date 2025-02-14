@@ -1,0 +1,15 @@
+
+services:
+  postgres :
+    image : bitnami/postgresql:latest
+    container_name: investments_control
+    ports :
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=macielzeferino
+      - POSTGRES_PASSWORD=senha1010
+      - POSTGRES_DATABASE=investments_database
+    volumes:
+      - investments_database:/bitnami/postgresql
+volumes:
+  investments_database:
