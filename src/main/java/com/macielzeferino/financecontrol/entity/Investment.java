@@ -1,13 +1,17 @@
 package com.macielzeferino.financecontrol.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 import java.util.UUID;
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="investments_table")
 public class Investment {
@@ -26,6 +30,7 @@ public class Investment {
 
     @UpdateTimestamp
     private Instant updatedTimestamp;
+
 
     public Investment(UUID investmentId, String investmentName, String s, Instant now, Object updatedTimestamp) {
     }
