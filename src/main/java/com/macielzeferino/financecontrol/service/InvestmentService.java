@@ -6,7 +6,6 @@ import com.macielzeferino.financecontrol.entity.Investment;
 import com.macielzeferino.financecontrol.repository.InvestmentRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,43 +19,40 @@ public class InvestmentService {
         this.investmentRepository = investmentRepository;
     }
 
-    public UUID createInvestment(CreateInvestmentDto createInvestmentDto){
-       var entity = new Investment(
-                UUID.randomUUID(),
+    public UUID createInvestment(CreateInvestmentDto createInvestmentDto) {
+        var entity = new Investment(
                 createInvestmentDto.investmentName(),
-                createInvestmentDto.investmentAmount(),
-                Instant.now(),
-                null);
+                createInvestmentDto.investmentAmount()
+        );
 
-       var investmentSaved = investmentRepository.save(entity);
-       return investmentSaved.getInvestmentId();
+        var investmentSaved = investmentRepository.save(entity);
+        return investmentSaved.getInvestmentId();
     }
 
-    public Optional <Investment> getInvestmentById(String investmentId) {
+    public Optional<Investment> getInvestmentById(String investmentId) {
         return investmentRepository.findById(UUID.fromString(investmentId));
     }
 
-    public List<Investment> listInvestments(){
+    public List<Investment> listInvestments() {
         return investmentRepository.findAll();
     }
-
 
     public void updateInvestmentById(String investmentId, UpdateInvestmentDto updateInvestmentDto) {
         var id = UUID.fromString(investmentId);
         var investmentExists = investmentRepository.findById(id);
-        if (investmentExists.isPresent()){
+        if (investmentExists.isPresent()) {
             var investment = investmentExists.get();
-            if (updateInvestmentDto.investmentName() !=null) {
+            if (updateInvestmentDto.investmentName() != null) {
                 investment.setInvestmentName(updateInvestmentDto.investmentName());
             }
-            if(updateInvestmentDto.investmentAmount() !=null){
+            if (updateInvestmentDto.investmentAmount() != null) {
                 investment.setInvestmentAmount(updateInvestmentDto.investmentAmount());
             }
             investmentRepository.save(investment);
         }
     }
 
-    public void deleteInvestmentById(String investmentId){
+    public void deleteInvestmentById(String investmentId) {
         var id = UUID.fromString(investmentId);
         var investmentExists = investmentRepository.existsById(id);
 
@@ -64,5 +60,4 @@ public class InvestmentService {
             investmentRepository.deleteById(id);
         }
     }
-
 }
