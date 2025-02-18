@@ -11,7 +11,6 @@ import java.time.Instant;
 import java.util.UUID;
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name="investments_table")
 public class Investment {
@@ -31,7 +30,10 @@ public class Investment {
     @UpdateTimestamp
     private Instant updatedTimestamp;
 
-
-    public Investment(UUID investmentId, String investmentName, String s, Instant now, Object updatedTimestamp) {
+    public Investment(String investmentName, Double investmentAmount) {
+        this.investmentName = investmentName;
+        this.investmentAmount = investmentAmount;
     }
+
+
 }
