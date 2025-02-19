@@ -1,14 +1,15 @@
-
 services:
-  postgres :
-    image : bitnami/postgresql:latest
+  postgres:
+    image: bitnami/postgresql:latest
     container_name: investments_control
-    ports :
+    ports:
       - '5432:5432'
+    env_file:
+      - .env
     environment:
-      - POSTGRES_USER=macielzeferino
-      - POSTGRES_PASSWORD=senha1010
-      - POSTGRES_DATABASE=investments_database
+      - POSTGRESQL_USERNAME=${POSTGRES_USER}
+      - POSTGRESQL_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRES_DB}
     volumes:
       - investments_database:/bitnami/postgresql
 volumes:
